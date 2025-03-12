@@ -31,7 +31,7 @@ jobs:
         run: ls -la
   
       - name: Zip artifact for deployment
-        run: zip -r release.zip .
+        run: zip -r release.zip . -x "node_modules/*" ".git/*"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -63,3 +63,6 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3BC763E1DA754B90BF5BD4FC6EA2D5A6 }}
           package: .
+
+      - name: List files before extraction
+        run: ls -la
